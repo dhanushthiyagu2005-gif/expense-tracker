@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expesess Tracker</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>  
+
+   <h2>Daily Expense Tracker</h2>
+
+   <div>
+   <input type="text" id="ex-name" placeholder="Expense name">
+   <input type="number" id="ex-amt" placeholder="Enter Amount"> <br>
+   <br>
+   <button onclick="addExpense()">Add Expense</button>
+</div>
+
+<br><br>
+
+<input type="number" id="daily-limit" value="150" placeholder="Daily Limit">
+<input type="number" id="monthly-limit" value="1500" placeholder="Monthly Limit">
+
+<select id="exp-category">
+    <option value="">Select Category</option>
+    <option value="Food">Food</option>
+    <option value="Travel">Travel</option>
+    <option value="Shopping">Shopping</option>
+    <option value="EMI">EMI</option>
+    <option value="Other">Others</option>
+</select>
+
+<h3>Expense</h3>
+<ul id="exp-list"></ul>
+
+<h3>Total:  ₹
+     <span id="totalexpenses">0</span></h3>
+
+     <h3>Expenses Chart</h3>
+
+     <div class="chart-row">
+     <div class="chart-box">
+        <canvas id="categoryChart"></canvas>
+        </div>
+        <br><br>
+        <div class="chart-box">
+        <canvas id="dailyChart"></canvas>
+        </div>
+        </div>
+
+        <h3>Check monthly summary</h3>
+        <input type="month" id="monthPicker" onchange="renderMonthlySummary()">
+        
+        <h3>Monthly Summary</h3>
+    <div id="monthlySummary"></div>
+
+    <div class="monthly-chartBox">
+    <h3>Monthly Comparison</h3>
+    <canvas id="monthlyComparisonChart"></canvas>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
