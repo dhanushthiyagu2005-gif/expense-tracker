@@ -7,24 +7,31 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 
 </head>
 
 <body>  
-
    <h2>Daily Expense Tracker</h2>
-
+<button id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
    <div>
    <input type="text" id="ex-name" placeholder="Expense name">
    <input type="number" id="ex-amt" placeholder="Enter Amount"> <br>
    <br>
-   <button onclick="addExpense()">Add Expense</button>
+   <button id="addBtn" onclick="addExpense()">Add Expense</button>
+   <button onclick="exportToExcel()">Export to Excel</button>
 </div>
 
 <br><br>
 
 <input type="number" id="daily-limit" value="150" placeholder="Daily Limit">
 <input type="number" id="monthly-limit" value="1500" placeholder="Monthly Limit">
+
+<br><br>
+<input type="text" id="customCategory" placeholder="Enter New Category">
+<button onclick="addCustomCategory()">Add Category</button>
+<button onclick="deleteCustomCategory()">Delete Category</button>
 
 <select id="exp-category">
     <option value="">Select Category</option>
@@ -59,8 +66,8 @@
         <h3>Monthly Summary</h3>
     <div id="monthlySummary"></div>
 
-    <div class="monthly-chartBox">
     <h3>Monthly Comparison</h3>
+    <div class="monthly-chartBox">
     <canvas id="monthlyComparisonChart"></canvas>
 </div>
     <script src="script.js"></script>

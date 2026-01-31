@@ -4,7 +4,7 @@ let expenseList = document.getElementById('exp-list');
 let totalSpan = document.getElementById('totalexpenses');
 let dailylimitInput = document.getElementById('daily-limit');
 let monthlylimitInput = document.getElementById('monthly-limit');
-let categoryInput = document.getElementById('exp-category')
+let categoryInput = document.getElementById('exp-category');
 
 
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
@@ -15,6 +15,10 @@ let monthlyTotal = 0;
 
 let today = new Date().toISOString().split('T')[0];
 let currentMonth = new Date().getMonth();
+
+let categoryChart = null;
+let dailyChart = null;
+let monthlyComparisonChart = null;
 
 
 function addExpense() {
@@ -34,7 +38,14 @@ function addExpense() {
     date: today
    };
 
-   expenses.push(expense);
+   if(editIndex === -1) {
+    expenses.push(expense);
+   }else {
+    expenses[editIndex] = expense;
+    editIndex = -1;
+    addbtn.innerText = "Add Expense";
+   }
+
    saveData();
    renderExpenses();
    renderCharts();
@@ -84,6 +95,7 @@ function renderExpenses() {
     li.innerHTML = `
       <strong>${exp.categoryInput}</strong> | ${exp.name}- ₹${exp.amount}
       <small style="color:gray;">(${exp.date})</small>
+      <button onclick ="editExpense(${expenses.length - 1 - index})">Edit</button>
       <button onclick="removeExpense(${expenses.length - 1 - index})">Delete</button>
     `;
 
@@ -130,9 +142,6 @@ function renderCharts() {
 
     let dayLabels = Object.keys(dailyTotals);
     let dayData = Object.values(dailyTotals);
-
-    let categoryChart;
-    let dailyChart;
 
 
     if(categoryChart) categoryChart.destroy();
@@ -225,8 +234,6 @@ function renderCharts() {
         let monthLabels = Object.keys(monthlySums);
         let monthData = Object.values(monthlySums);
 
-        let monthlyComparisonChart;
-
         if(monthlyComparisonChart) monthlyComparisonChart.destroy();
     
         monthlyComparisonChart = new Chart(document.getElementById('monthlyComparisonChart'), {
@@ -246,6 +253,133 @@ function renderCharts() {
 
     };
     renderMonthlyComparison();
+
+    function exportToExcel() {
+        if(expenses.length === 0) {
+            alert("No expenses to export!");
+            return;
+        }
+
+        let excelData = expenses.map(exp => ({
+            "Expense Name" : exp.name,
+            "Amount" : exp.amount,
+            "Category" : exp.categoryInput,
+            "Date" : exp.date
+        }));
+
+        let totalAmount = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+
+        excelData.push({
+            "Expense Name" : "Total",
+            "Amount" : totalAmount,
+            "Category" : "",
+            "Date" : ""
+        });
+
+        let worksheet = XLSX.utils.json_to_sheet(excelData);
+        let workBook = XLSX.utils.book_new();
+
+        XLSX.utils.book_append_sheet(workBook, worksheet, "Expenses");
+
+        XLSX.writeFile(workBook, "Expenses.XLSX");
+        expenses.innerHTML = Total;
+    }
+
+let editIndex = -1;
+let addbtn = document.getElementById('addBtn')
+
+function editExpense(index) {
+    editIndex = index;
+
+    name.value = expenses[index].name;
+    amount.value = expenses[index].amount;
+    categoryInput.value = expenses[index].categoryInput;
+
+    addbtn.innerText = "Updated Expense";
+}
+
+let categories = JSON.parse(localStorage.getItem("categories")) || ["Food", "Travel", "Shopping","EMI", "Other"];
+
+function renderCategories() {
+    categoryInput.innerHTML = `<option value ="">Select Cotrgory</option>`
+
+    categories.forEach(cat => {
+        let option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        categoryInput.appendChild(option);
+    });
+}
+
+function addCustomCategory() {
+    let newCat = document.getElementById('customCategory').value.trim();
+
+    if(!newCat) {
+        alert("Please enter a valid category name");
+        return;
+    }
+    if(categories.includes(newCat)){
+        alert("Category already exists!");
+        return;
+    }
+    categories.push(newCat);
+    localStorage.setItem("categories", JSON.stringify(categories));
+
+    renderCategories();
+    categoryInput.value = newCat;
+
+    document.getElementById('customCategory').value = "";
+}
+function deleteCustomCategory() {
+    let selectedCat = categoryInput.value;
+
+    if(!selectedCat) {
+        alert("Please select a category to delete!");
+        return;
+    }
+    let defaultCats = ["Food", "Travel", "Shopping","EMI", "Other"];
+    if(defaultCats.includes(selectedCat)){
+        alert("Default categories cannot be deleted!");
+        return;
+    }
+    let isUsed = expenses.some(exp => exp.categoryInput === selectedCat);
+
+    if(isUsed){
+        alert("Cannot delete category in use!");
+        return;
+    }
+
+    categories = categories.filter(cat => cat !== selectedCat);
+    localStorage.setItem("categories", JSON.stringify(categories));
+
+    renderCategories();
+    categoryInput.value = "";
+    
+    alert("Category deleted successfully!");
+
+}
+let themeToggle = document.getElementById("themeToggle");
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    themeToggle.innerText = "☀️ Light Mode";
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        themeToggle.innerText = "☀️ Light Mode";
+    } else {
+        localStorage.setItem("theme", "light");
+        themeToggle.innerText = "🌙 Dark Mode";
+    }
+}
+
+
+
 
 
  
