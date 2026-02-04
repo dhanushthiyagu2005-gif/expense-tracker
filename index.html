@@ -8,68 +8,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-
 </head>
 
-<body>  
-   <h2>Daily Expense Tracker</h2>
-<button id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
-   <div>
-   <input type="text" id="ex-name" placeholder="Expense name">
-   <input type="number" id="ex-amt" placeholder="Enter Amount"> <br>
-   <br>
-   <button id="addBtn" onclick="addExpense()">Add Expense</button>
-   <button onclick="exportToExcel()">Export to Excel</button>
-</div>
+<body class="auth-page">
+    
+    <div class="auth-card">
+        <h2>Login</h2>
 
-<br><br>
+        <input id="username" placeholder="Username">
+        <input type="text" id="password" placeholder="Password">
 
-<input type="number" id="daily-limit" value="150" placeholder="Daily Limit">
-<input type="number" id="monthly-limit" value="1500" placeholder="Monthly Limit">
-
-<br><br>
-<input type="text" id="customCategory" placeholder="Enter New Category">
-<button onclick="addCustomCategory()">Add Category</button>
-<button onclick="deleteCustomCategory()">Delete Category</button>
-
-<select id="exp-category">
-    <option value="">Select Category</option>
-    <option value="Food">Food</option>
-    <option value="Travel">Travel</option>
-    <option value="Shopping">Shopping</option>
-    <option value="EMI">EMI</option>
-    <option value="Other">Others</option>
-</select>
-
-<h3>Expense</h3>
-<ul id="exp-list"></ul>
-
-<h3>Total:  ₹
-     <span id="totalexpenses">0</span></h3>
-
-     <h3>Expenses Chart</h3>
-
-     <div class="chart-row">
-     <div class="chart-box">
-        <canvas id="categoryChart"></canvas>
-        </div>
-        <br><br>
-        <div class="chart-box">
-        <canvas id="dailyChart"></canvas>
-        </div>
-        </div>
-
-        <h3>Check monthly summary</h3>
-        <input type="month" id="monthPicker" onchange="renderMonthlySummary()">
-        
-        <h3>Monthly Summary</h3>
-    <div id="monthlySummary"></div>
-
-    <h3>Monthly Comparison</h3>
-    <div class="monthly-chartBox">
-    <canvas id="monthlyComparisonChart"></canvas>
-</div>
-    <script src="script.js"></script>
+        <button onclick="login()">Login</button>
+        <p id="authmsg"></p>
+    </div>
+    
+    <script src="auth.js"></script>
 </body>
 </html>

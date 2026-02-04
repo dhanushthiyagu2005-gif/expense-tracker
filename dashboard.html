@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="checkAuth()">
+
+  <div class="sidebar">
+    <h3>Expense App</h3>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="expense.html">Expenses</a>
+    <a href="settings.html">Settings</a>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="summary-card">
+    <h4>Today's Spending</h4>
+    <h2 id="todayTotal">₹ 0</h2>
+  </div>
+
+  <div class="main">
+
+    <h3>Todays's Expenses</h3>
+    <div style="width: 300px; max-width: 100%;">
+      <canvas id="dailyDashboardChart"></canvas>
+    </div>
+
+    <h3>Recent Expenses</h3>
+    <ul id="recentExpenses"></ul>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="common.js"></script>
+<script src="dashboard.js"></script>
+
+
+</body>
+</html>

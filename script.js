@@ -360,7 +360,6 @@ function deleteCustomCategory() {
 }
 let themeToggle = document.getElementById("themeToggle");
 
-// Load saved theme
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
     themeToggle.innerText = "☀️ Light Mode";

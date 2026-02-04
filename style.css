@@ -157,3 +157,17 @@ li {
     height: 320px;
   }
 }
+
+.summary-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.dark-mode .summary-card {
+  background: #1e1e1e;
+}
+
