@@ -358,25 +358,31 @@ function deleteCustomCategory() {
     alert("Category deleted successfully!");
 
 }
-let themeToggle = document.getElementById("themeToggle");
 
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    themeToggle.innerText = "☀️ Light Mode";
+let monthlyLimitInput = document.getElementById('monthly-limit');
+
+let savedMonthlyLimit = localStorage.getItem("monthlyLimit");
+if(savedMonthlyLimit) {
+    monthlyLimitInput.value = savedMonthlyLimit;
 }
 
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
+monthlyLimitInput.addEventListener("change", function() {
+    localStorage.setItem("monthlyLimit", monthlyLimitInput.value);
+});
 
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-        themeToggle.innerText = "☀️ Light Mode";
-    } else {
-        localStorage.setItem("theme", "light");
-        themeToggle.innerText = "🌙 Dark Mode";
-    }
+let crtMonth = new Date().getMonth();
+let savedMonth = localStorage.getItem('savedMonth');
+
+if(savedMonth === null ) {
+    localStorage.setItem('savedMonth', crtMonth);
+} else if(Number(savedMonth) !== crtMonth) {
+
+    expenses = [];
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+    localStorage.setItem("savedMonth", crtMonth);
+
+    alert("New month detected! Expenses have been reset.");
 }
-
 
 
 

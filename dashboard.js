@@ -1,25 +1,25 @@
+
+
+
+
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
+// ---------- DAILY BAR CHART ----------
 let dailyTotals = {};
-let today = new Date().toISOString().split('T')[0];
-let todayExpeses = expenses.filter(exp => exp.date === today);
-// collect daily totals
+let today = new Date().toISOString().split("T")[0];
+let todayExpenses = expenses.filter(exp => exp.date === today);
+
+// Collect daily totals
 expenses.forEach(exp => {
   if (!exp.date || !exp.amount) return;
 
-  if (dailyTotals[exp.date]) {
-    dailyTotals[exp.date] += Number(exp.amount);
-  } else {
-    dailyTotals[exp.date] = Number(exp.amount);
-  }
+  dailyTotals[exp.date] = (dailyTotals[exp.date] || 0) + Number(exp.amount);
 });
 
 let labels = Object.keys(dailyTotals);
 let data = Object.values(dailyTotals);
 
-if (labels.length === 0) {
-  console.log("No expense data for dashboard");
-} else {
+if (labels.length > 0) {
   new Chart(document.getElementById("dailyDashboardChart"), {
     type: "bar",
     data: {
@@ -34,27 +34,36 @@ if (labels.length === 0) {
       maintainAspectRatio: false
     }
   });
+} else {
+  console.log("No expense data for dashboard");
 }
-// Calculate today's total expenses
+
+// ---------- TODAY TOTAL ----------
 let todayTotal = 0;
-
-todayExpeses.forEach(exp => {
+todayExpenses.forEach(exp => {
   todayTotal += Number(exp.amount);
-
 });
-document.getElementById("todayTotal").innerHTML = `₹ ${todayTotal}`;
 
-let recentExpensesList = document.getElementById("recentExpenses");
-let LastFive = [...expenses].reverse().slice(0, 5);
-
-if(LastFive.length === 0) {
-  recentExpensesList.innerHTML = `<li>No recent expenses</li>`
-}else{
-  recentExpensesList.innerHTML = "";
-
-  LastFive.forEach(exp => {
-    let li = document.createElement("li");
-    li.innerText = `${exp.categoryInput} - ₹${exp.amount} on ${exp.date}`;
-    recentExpensesList.appendChild(li);
-  });
+let todayTotalEl = document.getElementById("todayTotal");
+if (todayTotalEl) {
+  todayTotalEl.innerHTML = `₹ ${todayTotal}`;
 }
+
+// ---------- RECENT 5 EXPENSES ----------
+let recentExpensesList = document.getElementById("recentExpenses");
+let lastFive = [...expenses].reverse().slice(0, 5);
+
+if (recentExpensesList) {
+  if (lastFive.length === 0) {
+    recentExpensesList.innerHTML = `<li>No recent expenses</li>`;
+  } else {
+    recentExpensesList.innerHTML = "";
+    lastFive.forEach(exp => {
+      let li = document.createElement("li");
+      li.innerText = `${exp.categoryInput} - ₹${exp.amount} on ${exp.date}`;
+      recentExpensesList.appendChild(li);
+    });
+  }
+}
+
+
