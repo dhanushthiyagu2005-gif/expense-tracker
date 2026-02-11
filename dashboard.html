@@ -3,44 +3,47 @@
 <head>
   <title>Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body onload="checkAuth()">
 
+<body class="with-sidebar" onload="checkAuth()">
+
+  <div id="sidebar-container"></div>
 
   <div class="sidebar">
-    <h3>Expense App</h3>
-    <a href="dashboard.html">Dashboard</a>
+    <h2 class="logo">Expense App</h2>
+    <a href="dashboard.html" class="active">Dashboard</a>
     <a href="expense.html">Expenses</a>
     <a href="settings.html">Settings</a>
     <button onclick="logout()">Logout</button>
   </div>
 
-  <h3>Todays's Expenses</h3>
-    <div style="width: 300px; max-width: 100%;">
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <div class="dashboard-grid">
+
+    <div class="large-card">
+      <h3>Today's Expenses</h3>
       <canvas id="dailyDashboardChart"></canvas>
     </div>
 
-  <div class="summary-card">
-    <h4>Today's Spending</h4>
-    <h2 id="todayTotal">₹ 0</h2>
+    <div class="card">
+      <h3>Today's Spending</h3>
+      <h2 id="todayTotal" class="amount">₹ 0</h2>
 
-
-    <h3>Recent Expenses</h3>
-    <ul id="recentExpenses"></ul>
-  </div>
-
-  <ul id="monthlyExpenses" class="expense-list"></ul>
-  
-  <div class="main">
-
-
+      <h4>Recent Expenses</h4>
+      <ul id="recentExpenses"></ul>
+    </div>
 
   </div>
+</div>
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="common.js"></script>
-<script src="dashboard.js"></script>
-
+  <script src="common.js"></script>
+  <script src="dashboard.js"></script>
 
 </body>
 </html>

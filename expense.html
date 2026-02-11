@@ -1,77 +1,102 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<link rel="stylesheet" href="style.css">
-<body>
-     <h2>Daily Expense Tracker</h2>
-   <div>
-   <input type="text" id="ex-name" placeholder="Expense name">
-   <input type="number" id="ex-amt" placeholder="Enter Amount"> <br>
-   <br>
-   <button id="addBtn" onclick="addExpense()">Add Expense</button>
-   <button onclick="exportToExcel()">Export to Excel</button>
-</div>
 
-<br><br>
+<body id="adding-exp">
 
-<input type="number" id="daily-limit" placeholder="Daily Limit">
-<input type="number" id="monthly-limit" placeholder="Monthly Limit">
+<div class="app-container">
 
-<br><br>
-<input type="text" id="customCategory" placeholder="Enter New Category">
-<button onclick="addCustomCategory()">Add Category</button>
-<button onclick="deleteCustomCategory()">Delete Category</button>
+    <div id="sidebar-container"></div>
 
-<select id="exp-category">
-    <option value="">Select Category</option>
-    <option value="Food">Food</option>
-    <option value="Travel">Travel</option>
-    <option value="Shopping">Shopping</option>
-    <option value="EMI">EMI</option>
-    <option value="Other">Others</option>
-</select>
+    <div class="left-panel">
+        <h2>Daily Expense Tracker</h2>
 
-<h3>Expense</h3>
-<ul id="exp-list"></ul>
+        <select id="exp-category">
+            <option value="">Select Category</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="EMI">EMI</option>
+            <option value="Other">Others</option>
+        </select>
 
-<h3>Total:  ₹
-     <span id="totalexpenses">0</span></h3>
+        <input type="text" id="ex-name" placeholder="Expense name">
+        <input type="number" id="ex-amt" placeholder="Enter Amount">
 
-     <h3>Expenses Chart</h3>
+        <button id="addBtn" onclick="addExpense()">Add Expense</button>
+        <button onclick="exportToExcel()">Export to Excel</button>
 
-     <div class="chart-row">
-     <div class="chart-box">
-        <canvas id="categoryChart"></canvas>
-        </div>
-        <br><br>
+        <hr>
+
+        <input type="number" id="daily-limit" placeholder="Daily Limit">
+        <input type="number" id="monthly-limit" placeholder="Monthly Limit">
+
+        <hr>
+
+        <input type="text" id="customCategory" placeholder="Enter New Category">
+        <button onclick="addCustomCategory()">Add Category</button>
+        <button onclick="deleteCustomCategory()">Delete Category</button>
+    </div>
+
+
+    <!-- MIDDLE PANEL -->
+    <div class="middle-panel">
+        <h3>Expenses</h3>
+
+        <select id="filterType" onchange="renderExpenses()">
+            <option value="all">All Expenses</option>
+            <option value="today">Today's Expenses</option>
+            <option value="month">Month's Expenses</option>
+        </select>
+
+        <ul id="exp-list"></ul>
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+        <h3>Total: ₹ <span id="totalexpenses">0</span></h3>
+
         <div class="chart-box">
-        <canvas id="dailyChart"></canvas>
-        </div>
+            <canvas id="categoryChart"></canvas>
         </div>
 
-        <h3>Check monthly summary</h3>
+        <div class="chart-box">
+            <canvas id="dailyChart"></canvas>
+        </div>
+
+        <hr>
+
+        <h3>Check Monthly Summary</h3>
         <input type="month" id="monthPicker" onchange="renderMonthlySummary()">
-        
-        <h3>Monthly Summary</h3>
-    <div id="monthlySummary"></div>
 
-    <h3>Monthly Comparison</h3>
-    <div class="monthly-chartBox">
-    <canvas id="monthlyComparisonChart"></canvas>
+        <div id="monthlySummary"></div>
+
+        <hr>
+
+        <h3>Monthly Comparison</h3>
+        <div class="chart-box">
+            <canvas id="monthlyComparisonChart"></canvas>
+        </div>
+
+    </div>
+
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- <script src="common.js"></script>
+<script src="common.js"></script>
 <script src="expense.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
-
-
-
-

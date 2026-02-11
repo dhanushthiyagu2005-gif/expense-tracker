@@ -23,6 +23,9 @@ let monthlyComparisonChart = null;
 
 function addExpense() {
 
+    let todayExp = new Date().toISOString().split("T")[0];
+
+
     let expenseName = name.value.trim();
     let expenseAmount = Number(amount.value);
     let catogory = categoryInput.value;
@@ -35,7 +38,7 @@ function addExpense() {
     name: expenseName,
     amount: expenseAmount,
     categoryInput: catogory,
-    date: today
+    date: todayExp
    };
 
    if(editIndex === -1) {
@@ -61,13 +64,32 @@ function addExpense() {
 Total += expenseAmount;  
 totalSpan.innerText = Total
 
-dailyTotal += expenseAmount;
-monthlyTotal += expenseAmount;
+let today = new Date().toISOString().split("T")[0];
+
+function getMonthlyTotal() {
+    let now = new Date();
+    let currentMonth = now.getMonth();
+    let currentYear = now.getFullYear();
+
+    let total = 0;
+
+    expenses.forEach(exp => {
+        let d = new Date(exp.date);
+        if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) {
+            total += Number(exp.amount);
+        }
+    });
+
+    return total;
+}
+
 
 let dailyAmt = Number(dailylimitInput.value);
+let todayTotal = getTodayTotal();
 let monthlyAmt = Number(monthlylimitInput.value);
+let monthlyTotal = getMonthlyTotal();
 
-if(dailyAmt && dailyTotal > dailyAmt) {
+if(dailyAmt && todayTotal > dailyAmt) {
     alert("You have exceeded your daily limit!");
 }
 if(monthlyAmt && monthlyTotal > monthlyAmt) {
@@ -86,25 +108,45 @@ function saveData() {
 }
 
 function renderExpenses() {
-  expenseList.innerHTML = "";
-  Total = 0;
 
-  [...expenses].reverse().forEach((exp, index) => {
+  let list = document.getElementById("exp-list");
+  let filter = document.getElementById("filterType").value;
+
+  list.innerHTML = "";
+
+  let today = new Date().toISOString().split("T")[0];
+  let now = new Date();
+  let currentMonth = now.getMonth();
+  let currentYear = now.getFullYear();
+
+  let filteredExpenses = expenses;
+
+  if (filter === "today") {
+    filteredExpenses = expenses.filter(exp => exp.date === today);
+  }
+
+  if (filter === "month") {
+    filteredExpenses = expenses.filter(exp => {
+      let expDate = new Date(exp.date);
+      return (
+        expDate.getMonth() === currentMonth &&
+        expDate.getFullYear() === currentYear
+      );
+    });
+  }
+
+  if (filteredExpenses.length === 0) {
+    list.innerHTML = "<li>No expenses found</li>";
+    return;
+  }
+
+  filteredExpenses.slice().reverse().forEach((exp, index) => {
     let li = document.createElement("li");
-
-    li.innerHTML = `
-      <strong>${exp.categoryInput}</strong> | ${exp.name}- ₹${exp.amount}
-      <small style="color:gray;">(${exp.date})</small>
-      <button onclick ="editExpense(${expenses.length - 1 - index})">Edit</button>
-      <button onclick="removeExpense(${expenses.length - 1 - index})">Delete</button>
-    `;
-
-    expenseList.appendChild(li);
-    Total += exp.amount;
+    li.textContent = `${exp.name} - ₹${exp.amount} (${exp.categoryInput}) on ${exp.date}`;
+    list.appendChild(li);
   });
-
-  totalSpan.innerText = Total;
 }
+
 
 
 function removeExpense(index) {
@@ -384,6 +426,38 @@ if(savedMonth === null ) {
     alert("New month detected! Expenses have been reset.");
 }
 
+const dailyInput = document.getElementById("daily-limit");
+const monthlyInput = document.getElementById("monthly-limit");
+
+// Load saved values
+if (localStorage.getItem("dailyLimit")) {
+  dailyInput.value = localStorage.getItem("dailyLimit");
+}
+
+if (localStorage.getItem("monthlyLimit")) {
+  monthlyInput.value = localStorage.getItem("monthlyLimit");
+}
+
+dailyInput.addEventListener("input", function () {
+  localStorage.setItem("dailyLimit", dailyInput.value);
+});
+
+monthlyInput.addEventListener("input", function () {
+  localStorage.setItem("monthlyLimit", monthlyInput.value);
+});
+
+function getTodayTotal() {
+    let today = new Date().toISOString().split("T")[0];
+
+    let todayTotal = expenses.filter(exp => exp.date === today);
+
+    let total = 0;
+    todayTotal.forEach(exp => {
+
+        total += exp.amount;
+    });
+    return total;
+}
 
 
 

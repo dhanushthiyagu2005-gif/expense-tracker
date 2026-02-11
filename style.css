@@ -1,173 +1,535 @@
-/* ========== RESET ========== */
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* ========== BODY ========== */
 body {
-  background: #f5f7fb;
-  color: #222;
-  padding: 12px;
-  transition: background 0.3s ease, color 0.3s ease;
+  background: #f4f6fb;
+  color: #333;
+  min-height: 100vh;
 }
 
-/* ========== HEADINGS ========== */
-h2 {
+/* =========================
+   LOGIN PAGE
+========================= */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 350px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  animation: fadeIn 0.6s ease;
+}
+
+.auth-card h2 {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
-h3 {
-  margin: 20px 0 10px;
-}
-
-/* ========== INPUTS & SELECT ========== */
-input,
-select {
+.auth-card input {
   width: 100%;
   padding: 12px;
-  margin: 6px 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
 }
 
-/* ========== BUTTONS ========== */
-button {
+.auth-card input:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.auth-card button {
+  width: 100%;
   padding: 12px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
   border: none;
-  background: #4f46e5;
-  color: #fff;
-  font-size: 15px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: 0.3s;
+}
+
+.auth-card button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Login page   */
+
+/* VIDEO BACKGROUND */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6); /* dim video so text is readable */
+}
+
+/* LOGIN CARD */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 350px;
+  text-align: center;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-card button:hover {
+  transform: translateY(-2px);
+}
+
+/*  Login background  */
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+/* Video Background */
+#bg-video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    filter:brightness(0.5);
+}
+
+/* Center Login */
+.auth-page{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Glass Effect Card */
+.auth-card{
+    width:350px;
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.15);
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    text-align:center;
+    color:white;
+    animation:fadeIn 1s ease;
+}
+
+.auth-card h2{
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+/* Inputs */
+.auth-card input{
+    width:100%;
+    padding:12px;
+    margin:12px 0;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+}
+
+/* Button */
+.auth-card button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(45deg,#667eea,#764ba2);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.auth-card button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Animation */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* ensure text is visible */
+#authmsg {
+  margin-top: 10px;
+  color: #ff4d4d;
+}
+
+
+/* =========================
+   SIDEBAR (Dashboard only)
+========================= */
+
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar h3 {
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #d1d5db;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.sidebar button {
+  margin-top: 20px;
+  padding: 8px 12px;
+  background: #ef4444;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* =========================
+   MAIN CONTENT AREA
+========================= */
+.main,
+.summary-card {
+  padding: 30px;
+}
+
+/* =========================
+   EXPENSE PAGE LAYOUT
+========================= */
+.with-sidebar .main {
+  margin-left: 220px;
+}
+
+#adding-exp {
+    display: flex;
+    padding-left: 10%;
+}
+
+body:not(.auth-page):not(.with-sidebar) {
+  display: flex;
+  justify-content: center;
+}
+
+body:not(.auth-page):not(.with-sidebar) > * {
+  width: 900px;
+  max-width: 95%;
+  margin-top: 30px;
+}
+
+/* =========================
+   INPUTS & BUTTONS
+========================= */
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin: 5px 5px 10px 0;
+  transition: 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.02);
-  background: #4338ca;
+  transform: translateY(-2px);
+  opacity: 0.9;
 }
 
-button:active {
-  transform: scale(0.98);
-}
-
-/* Small buttons inside list */
-li button {
-  padding: 6px 10px;
-  font-size: 13px;
-  margin-left: 6px;
-}
-
-/* ========== LIMIT INPUTS ========== */
-#daily-limit,
-#monthly-limit {
-  width: 48%;
-  display: inline-block;
-}
-
-/* ========== LIST ========== */
-ul {
+/* =========================
+   EXPENSE LIST
+========================= */
+#exp-list {
   list-style: none;
+  margin-top: 20px;
 }
 
-li {
-  background: #ffffff;
-  margin: 8px 0;
+#exp-list li {
+  background: white;
   padding: 12px;
-  border-radius: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
 }
 
-/* ========== TOTAL ========== */
-#totalexpenses {
-  color: #16a34a;
-  font-weight: bold;
+#exp-list li:hover {
+  transform: translateY(-3px);
 }
 
-/* ========== CHARTS ========== */
+/* =========================
+   TOTAL DISPLAY
+========================= */
+h3 span {
+  color: #667eea;
+}
+
+/* =========================
+   CHART AREA
+========================= */
 .chart-row {
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.chart-box,
-.monthly-chartBox {
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 16px;
-  height: 280px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-/* ========== MONTHLY SUMMARY ========== */
-#monthlySummary {
-  background: #ffffff;
-  padding: 12px;
+.chart-box {
+  flex: 1;
+  min-width: 300px;
+  height: 300px;
+  background: white;
+  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* ========== DARK MODE ========== */
-.dark-mode {
-  background: #121212;
-  color: #e5e5e5;
+.monthly-chartBox {
+  height: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-.dark-mode input,
-.dark-mode select {
-  background: #1e1e1e;
-  color: #ffffff;
-  border: 1px solid #444;
+/* =========================
+   MONTHLY SUMMARY CARD
+========================= */
+#monthlySummary {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-.dark-mode button {
-  background: #6366f1;
-}
-
-.dark-mode li,
-.dark-mode .chart-box,
-.dark-mode .monthly-chartBox,
-.dark-mode #monthlySummary {
-  background: #1e1e1e;
-}
-
-/* ========== DESKTOP VIEW ========== */
-@media (min-width: 768px) {
-  body {
-    max-width: 900px;
-    margin: auto;
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-
-  .chart-row {
-    flex-direction: row;
-  }
-
-  .chart-box {
-    flex: 1;
-    height: 320px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.summary-card {
+/* Dashboard Layout */
+.dashboard-container {
+  margin-left: 220px;
+  padding: 40px;
+  background: #f4f7ff;
+  min-height: 100vh;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.large-card {
+  height: 420px;
+  padding: bottom 20px; ;
+}
+
+.large-card canvas {
+  height: 320px !important;
+}
+
+.amount {
+  font-size: 32px;
+  font-weight: 600;
+  color: #4e73df;
+}
+
+
+/* Cards */
+.card {
   background: #ffffff;
-  padding: 16px;
-  border-radius: 14px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
 }
 
-.dark-mode .summary-card {
-  background: #1e1e1e;
+.card:hover {
+  transform: translateY(-5px);
 }
+
+/* Chart */
+.chart-card canvas {
+  max-width: 100%;
+}
+
+/* Summary */
+.summary-card h1 {
+  font-size: 36px;
+  margin: 15px 0;
+  color: #4f6df5;
+}
+
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.recent-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Sidebar Upgrade */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1e2a3a, #16202c);
+  color: white;
+  padding: 30px 20px;
+  position: fixed;
+}
+
+.sidebar .logo {
+  margin-bottom: 40px;
+}
+
+.sidebar a {
+  display: block;
+  color: #cfd8dc;
+  text-decoration: none;
+  margin: 15px 0;
+  transition: 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.sidebar button {
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background: #ff1a1a;
+}
+
+
+
 
