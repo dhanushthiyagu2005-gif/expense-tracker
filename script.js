@@ -61,9 +61,6 @@ function addExpense() {
     categoryInput.value = "";
    
 
-Total += expenseAmount;  
-totalSpan.innerText = Total
-
 let today = new Date().toISOString().split("T")[0];
 
 function getMonthlyTotal() {
@@ -110,6 +107,7 @@ function saveData() {
 function renderExpenses() {
 
   let list = document.getElementById("exp-list");
+  let totalSpan = document.getElementById("totalexpenses");
   let filter = document.getElementById("filterType").value;
 
   list.innerHTML = "";
@@ -135,17 +133,26 @@ function renderExpenses() {
     });
   }
 
+  let total = 0;
+
   if (filteredExpenses.length === 0) {
     list.innerHTML = "<li>No expenses found</li>";
+    totalSpan.innerText = 0;   
     return;
   }
 
-  filteredExpenses.slice().reverse().forEach((exp, index) => {
+  filteredExpenses.slice().reverse().forEach((exp) => {
+
+    total += Number(exp.amount);  
+
     let li = document.createElement("li");
     li.textContent = `${exp.name} - ₹${exp.amount} (${exp.categoryInput}) on ${exp.date}`;
     list.appendChild(li);
   });
+
+  totalSpan.innerText = total;   
 }
+
 
 
 
