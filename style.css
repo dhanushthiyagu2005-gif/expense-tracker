@@ -530,6 +530,83 @@ h3 span {
   background: #ff1a1a;
 }
 
+/* Dark Mode */
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+/* Sidebar */
+body.dark-mode .sidebar {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+}
+
+/* Panels / Cards */
+body.dark-mode .left-panel,
+body.dark-mode .middle-panel,
+body.dark-mode .right-panel,
+body.dark-mode .card,
+body.dark-mode .summary-card,
+body.dark-mode .chart-box,
+body.dark-mode #monthlySummary {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Inputs & Select */
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+/* Expense List */
+body.dark-mode #exp-list li {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+/* Buttons */
+body.dark-mode button {
+  background: linear-gradient(45deg, #4f46e5, #7c3aed);
+  color: white;
+}
+
+/* Headings */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: #ffffff;
+}
+
+#themeToggle {
+  position: fixed;
+  top: 200px;
+  width: 120px;
+  padding: 10px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#themeToggle:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+.setting-bar {
+  margin-right: 780px;
+}
+
+
 
 
 
