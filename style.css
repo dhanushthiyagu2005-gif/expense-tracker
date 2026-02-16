@@ -435,7 +435,7 @@ h3 span {
 
 .large-card {
   height: 420px;
-  padding: bottom 20px; ;
+  padding-bottom: 20px;
 }
 
 .large-card canvas {
@@ -606,6 +606,86 @@ body.dark-mode h4 {
   margin-right: 780px;
 }
 
+/* Mobile Responsive */
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.app-container,
+.dashboard-container,
+.with-sidebar .main {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+
+/* =========================
+   MOBILE LAYOUT
+========================= */
+
+@media screen and (max-width: 768px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .app-container,
+    .dashboard-container,
+    .with-sidebar .main {
+        margin-left: 0 !important;
+        padding: 15px;
+    }
+
+}
+
+
+
+.menu-btn {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-btn {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        z-index: 1001;
+    }
+}
+
+/* =========================
+   FIX FOR ALL CONTENT AREAS
+========================= */
+
+@media screen and (max-width: 768px) {
+
+    .dashboard-container,
+    .app-container,
+    .with-sidebar .main,
+    .main {
+        margin-left: 0 !important;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+}
 
 
 

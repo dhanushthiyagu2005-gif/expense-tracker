@@ -53,3 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Sidebar load error:", error));
     }
 });
+
+function toggleSidebar() {
+    document.querySelector(".sidebar").classList.toggle("active");
+}

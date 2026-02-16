@@ -312,7 +312,7 @@ function renderCharts() {
         let excelData = expenses.map(exp => ({
             "Expense Name" : exp.name,
             "Amount" : exp.amount,
-            "Category" : exp.categoryInput,
+            "Category" : exp.category,
             "Date" : exp.date
         }));
 
