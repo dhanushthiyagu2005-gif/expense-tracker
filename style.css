@@ -731,7 +731,12 @@ html, body {
     display: flex;
     flex-direction: column;
     padding-left: 4%;
-
+}
+.main-content {
+  max-width: 100%;
+  padding-left: 40%;
+  
+}
 }
 
 
