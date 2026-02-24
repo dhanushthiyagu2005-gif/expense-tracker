@@ -8,6 +8,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+
 body {
   background: #f4f6fb;
   color: #333;
@@ -359,13 +361,13 @@ h3 span {
 }
 
 .chart-box {
-  flex: 1;
-  min-width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 600px;
+  height: 300px;  
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05); box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
 .monthly-chartBox {
@@ -435,7 +437,7 @@ h3 span {
 
 .large-card {
   height: 420px;
-  padding-bottom: 20px;
+  max-width: 700px;
 }
 
 .large-card canvas {
@@ -488,12 +490,14 @@ h3 span {
 
 /* Sidebar Upgrade */
 .sidebar {
-  width: 220px;
+  width: 240px;
   height: 100vh;
-  background: linear-gradient(180deg, #1e2a3a, #16202c);
+  background: #111827;
   color: white;
-  padding: 30px 20px;
   position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px;
 }
 
 .sidebar .logo {
@@ -606,86 +610,130 @@ body.dark-mode h4 {
   margin-right: 780px;
 }
 
-/* Mobile Responsive */
+/* =========================
+   DESKTOP DASHBOARD GRID
+========================= */
 
-.sidebar {
-    width: 220px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
 }
 
-.app-container,
-.dashboard-container,
-.with-sidebar .main {
-    margin-left: 220px;
+.large-card {
+    background: white;
     padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
 }
 
 
 /* =========================
-   MOBILE LAYOUT
+   MOBILE DASHBOARD FIX
 ========================= */
 
 @media screen and (max-width: 768px) {
 
-    .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 1000;
-    }
+  .app-container,
+.dashboard-container,
+.main,
+.large-card,
+.card,
+.chart-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
 
-    .sidebar.active {
-        transform: translateX(0);
-    }
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
 
-    .app-container,
-    .dashboard-container,
-    .with-sidebar .main {
+    /* Stack chart and spending vertically */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+.large-card {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+    /* Spending card below chart */
+    .card {
+    width: 100%;
+    max-width: 100%;
+}
+
+    /* Fix sidebar spacing */
+    .dashboard-container {
         margin-left: 0 !important;
         padding: 15px;
     }
 
+    /* hamburger button */
+.menu-toggle {
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
 }
 
-
-
-.menu-btn {
-    display: none;
+/* sidebar hidden by default */
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background: #111827;
+  color: white;
+  padding: 20px;
+  transition: 0.3s;
 }
 
-@media screen and (max-width: 768px) {
-    .menu-btn {
-        display: block;
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        background: #4f46e5;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        z-index: 1001;
-    }
+/* show sidebar */
+.sidebar.active {
+  left: 0;
 }
 
-/* =========================
-   FIX FOR ALL CONTENT AREAS
-========================= */
+* {
+    box-sizing: border-box;
+}
+.main-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+}
 
-@media screen and (max-width: 768px) {
-
-    .dashboard-container,
-    .app-container,
-    .with-sidebar .main,
-    .main {
-        margin-left: 0 !important;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+#adding-exp {
+    display: flex;
+    flex-direction: column;
+    padding-left: 4%;
 
 }
+
 
 
 

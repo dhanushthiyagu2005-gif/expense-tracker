@@ -34,8 +34,9 @@
 
         <button onclick="exportToExcel()">Export to Excel</button>
 
-        <hr>
+        <br>
 
+        <br>
         <input type="number" id="daily-limit" placeholder="Daily Limit">
         <input type="number" id="monthly-limit" placeholder="Monthly Limit">
 
@@ -70,18 +71,24 @@
             <canvas id="categoryChart"></canvas>
         </div>
 
+        <br>
+
         <div class="chart-box">
             <canvas id="dailyChart"></canvas>
         </div>
+        <br>
 
         <hr>
+        <br>
 
         <h3>Check Monthly Summary</h3>
         <input type="month" id="monthPicker" onchange="renderMonthlySummary()">
 
         <div id="monthlySummary"></div>
 
+        <br>
         <hr>
+        <br>
 
         <h3>Monthly Comparison</h3>
         <div class="chart-box">

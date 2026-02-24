@@ -2,15 +2,17 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body class="with-sidebar" onload="checkAuth()">
 
+
   <div id="sidebar-container"></div>
 
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2 class="logo">Expense App</h2>
     <a href="dashboard.html" class="active">Dashboard</a>
     <a href="expense.html">Expenses</a>
@@ -28,7 +30,11 @@
       <canvas id="dailyDashboardChart"></canvas>
     </div>
 
-    <div class="card">
+  </div>
+
+  <br>
+
+  <div class="card">
       <h3>Today's Spending</h3>
       <h2 id="todayTotal" class="amount">₹ 0</h2>
 
@@ -36,7 +42,6 @@
       <ul id="recentExpenses"></ul>
     </div>
 
-  </div>
 </div>
 
 
